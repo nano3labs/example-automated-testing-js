@@ -27,7 +27,38 @@ class App extends Component {
     this.setState({ submitted: true })
   }
 
-  render() {
+  handleLogout = () => {
+    this.setState({ submitted: false })
+  }
+
+  renderWelcome () {
+    return (
+      <React.Fragment>
+        <p>Successfully submitted form</p>
+        <Button onClick={this.handleLogout} variant="raised" color="primary">Logout</Button>
+      </React.Fragment>
+    )
+  }
+
+  renderLoginForm () {
+    const { classes } = this.props
+
+    return (
+      <form className={classes.form}>
+        <Grid container className={classes.field}>
+          <TextField name="email" placeholder="Email" />
+        </Grid>
+        <Grid container className={classes.field}>
+          <TextField name="password" type="password" placeholder="password" />
+        </Grid>
+        <Grid container className={classes.field}>
+          <Button onClick={this.handleSubmit} variant="raised" color="primary">Login</Button>
+        </Grid>
+      </form>
+    )
+  }
+
+  render () {
     const { classes } = this.props
 
     return (
@@ -37,18 +68,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          {this.state.submitted && <p>Successfully submitted form</p>}
-          <form className={classes.form}>
-            <Grid container className={classes.field}>
-              <TextField name="full-name" placeholder="Full Name" />
-            </Grid>
-            <Grid container className={classes.field}>
-              <TextField name="email" placeholder="email" />
-            </Grid>
-            <Grid container className={classes.field}>
-              <Button onClick={this.handleSubmit} variant="raised" color="primary">Send</Button>
-            </Grid>
-          </form>
+          {this.state.submitted ?
+            this.renderWelcome() :
+            this.renderLoginForm()
+          }
         </p>
       </div>
     )
