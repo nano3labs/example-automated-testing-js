@@ -19,16 +19,17 @@ class App extends Component {
     super(props)
 
     this.state = {
-      submitted: false
+      submitted: false,
+      seeYouSoon: false
     }
   }
 
   handleSubmit = () => {
-    this.setState({ submitted: true })
+    this.setState({ submitted: true, seeYouSoon: false })
   }
 
   handleLogout = () => {
-    this.setState({ submitted: false })
+    this.setState({ submitted: false, seeYouSoon: true })
   }
 
   renderWelcome () {
@@ -45,6 +46,8 @@ class App extends Component {
 
     return (
       <form className={classes.form}>
+        <h1>Login</h1>
+        {this.state.seeYouSoon && <p>Goodbye! See you soon!</p>}
         <Grid container className={classes.field}>
           <TextField name="email" placeholder="Email" />
         </Grid>

@@ -10,7 +10,11 @@ describe('login', () => {
   })
 
   it('A User logs off and sees a goodbye message', () => {
+    loginWith('michael@nano3labs.com', 'password')
 
+    cy.get('button').click()
+
+    expect(cy.contains('Goodbye! See you soon!'))
   })
 })
 
